@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "586021145029",
+    "project_id": "contas-53559",
+    "storage_bucket": "contas-53559.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586021145029:android:fb9ac0826f7e288c06e3ac",
+        "android_client_info": {
+          "package_name": "com.hideki257.controle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586021145029-5mg3h4v6oogrv4692je0r0pimnkhlt46.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO8ZKkre9p12h7qiM7BDsMr03Ff_AsKP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586021145029-5mg3h4v6oogrv4692je0r0pimnkhlt46.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
