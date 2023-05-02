@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../controllers/login_contr.dart';
+import '../controllers/login_cont.dart';
 import '../utils/resultado.dart';
 import '../widgets/form_formatado.dart';
 import '../widgets/meu_text_form_field.dart';
