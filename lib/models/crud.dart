@@ -66,3 +66,9 @@ extension StringCrudExt on String {
 }
 
 List<Crud> listaCrud = [Crud.read, Crud.create, Crud.update, Crud.delete];
+
+class UsuarioCrudKey {
+  Crud crud;
+  String userId;
+  UsuarioCrudKey({required this.crud, required this.userId});
+}
