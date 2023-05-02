@@ -46,9 +46,23 @@ extension CrudExt on Crud {
   bool get isNotEdit => !isEdit;
 }
 
-class CrudKey {
-  final Crud crud;
-  List<Map<String, dynamic>> keys;
+extension StringCrudExt on String {
+  Crud _toCrud() {
+    switch (trim().toLowerCase()) {
+      case 'create':
+        return Crud.create;
+      case 'read':
+        return Crud.read;
+      case 'update':
+        return Crud.update;
+      case 'delete':
+        return Crud.delete;
+      default:
+        return Crud.read;
+    }
+  }
 
-  CrudKey({required this.crud, required this.keys});
+  Crud get toCrud => _toCrud();
 }
+
+List<Crud> listaCrud = [Crud.read, Crud.create, Crud.update, Crud.delete];

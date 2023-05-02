@@ -1,3 +1,4 @@
+import 'package:contas/widgets/popup_menu_user_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'menu_widget.dart';
@@ -12,9 +13,11 @@ class FormFormatado extends StatelessWidget {
   final VoidCallback? onSalvar;
   final String salvarText;
   final IconData salvarIcon;
+  final Key? scaffoldKey;
 
   const FormFormatado({
     Key? key,
+    this.scaffoldKey,
     this.appBarTitulo,
     this.showMenu = false,
     this.appBarActions,
@@ -30,10 +33,20 @@ class FormFormatado extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (buildContext, constraints) {
       final isMobile = constraints.maxWidth < 600;
+      List<Widget>? appBarActions = this.appBarActions;
+
+      if (appBarTitulo != null) {
+        if (appBarActions != null) {
+          appBarActions.add(const PopupMenuUserWidget());
+        } else {
+          appBarActions = [const PopupMenuUserWidget()];
+        }
+      }
 
       return Scaffold(
+        key: scaffoldKey,
         drawer: isMobile && showMenu ? MenuWidget(isMobile: isMobile) : null,
-        appBar: (appBarTitulo == null && appBarTitulo == null)
+        appBar: (appBarTitulo == null)
             ? null
             : AppBar(
                 title: Text(appBarTitulo ?? ''),

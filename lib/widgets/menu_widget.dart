@@ -55,9 +55,8 @@ class MenuWidget extends ConsumerWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onTap: () {
-                  Navigator.pushNamed(context, MyRouter.homePage);
-                },
+                onTap: () =>
+                    Navigator.popAndPushNamed(context, MyRouter.homePage),
               ),
               const Divider(height: 1),
               ListTile(
@@ -69,8 +68,8 @@ class MenuWidget extends ConsumerWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onTap: () {
-                  data.sair();
+                onTap: () async {
+                  await data.sair();
                   if (isMobile) {
                     Navigator.pop(context);
                   }

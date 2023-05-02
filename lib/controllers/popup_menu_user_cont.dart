@@ -1,22 +1,20 @@
-import 'package:contas/data/user_auth_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/user_auth_data.dart';
 import '../data/usuario_data.dart';
 import '../models/usuario.dart';
 
-final menuContProvider = FutureProvider<MenuCont>((ref) async {
-  MenuCont menuCont = MenuCont(ref: ref);
-  await menuCont.refresh();
-  return menuCont;
+final popupMenuUserContProvider =
+    FutureProvider<PopupMenuUserCont>((ref) async {
+  PopupMenuUserCont popupMenuUserCont = PopupMenuUserCont(ref: ref);
+  await popupMenuUserCont.refresh();
+  return popupMenuUserCont;
 });
 
-class MenuCont {
+class PopupMenuUserCont {
   final Ref ref;
-  Usuario? usuario;
-
-  MenuCont({required this.ref}) {
-    refresh();
-  }
+  late Usuario usuario;
+  PopupMenuUserCont({required this.ref});
 
   refresh() async {
     UsuarioData usuarioData = ref.read(usuarioDataProvider);
