@@ -40,7 +40,7 @@ class UsuarioData {
     Resultado? result;
     FirebaseFirestore db = await DBFirestore.get();
     await PathRef.docRefUsuarioById(db, usuario.userId)
-        .set(usuario.toMap())
+        .update(usuario.toMapUpdate())
         .catchError((e) {
       result = Resultado(erro: true, mensagem: e.toString());
     });
@@ -72,5 +72,18 @@ class UsuarioData {
     } else {
       throw UsuarioDataExeption(erro);
     }
+  }
+
+  Future<bool> existeUsuarioByEmail(String email) async {
+    bool retorno = false;
+    FirebaseFirestore db = await DBFirestore.get();
+    await PathRef.colRefUsuarios(db)
+        .where('email', isEqualTo: email)
+        .count()
+        .get()
+        .then((value) {
+      retorno = value.count > 0;
+    }).catchError((_) {});
+    return retorno;
   }
 }

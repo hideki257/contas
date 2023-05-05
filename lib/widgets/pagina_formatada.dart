@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'menu_widget.dart';
-import 'popup_menu_user_widget.dart';
+//import 'popup_menu_user_widget.dart';
 
 class PaginaFormatada extends StatelessWidget {
   final Key? scaffoldKey;
@@ -9,6 +9,7 @@ class PaginaFormatada extends StatelessWidget {
   final List<Widget>? appBarActions;
   final bool showMenu;
   final Widget page;
+  final Widget? floatingActionButton;
   const PaginaFormatada({
     Key? key,
     this.scaffoldKey,
@@ -16,19 +17,12 @@ class PaginaFormatada extends StatelessWidget {
     this.appBarActions,
     required this.page,
     this.showMenu = false,
+    this.floatingActionButton,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<Widget>? appBarActions = this.appBarActions;
-
-    if (appBarTitulo != null) {
-      if (appBarActions != null) {
-        appBarActions.add(const PopupMenuUserWidget());
-      } else {
-        appBarActions = [const PopupMenuUserWidget()];
-      }
-    }
 
     return LayoutBuilder(builder: (contextBuilder, constraints) {
       final isMobile = constraints.maxWidth < 600;
@@ -59,6 +53,7 @@ class PaginaFormatada extends StatelessWidget {
                   Flexible(child: page),
                 ],
               ),
+        floatingActionButton: floatingActionButton,
       );
     });
   }

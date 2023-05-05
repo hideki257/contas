@@ -36,7 +36,7 @@ extension CrudExt on Crud {
   String get toMap => _toMap();
 
   bool get isNew => this == Crud.create;
-  bool get isNowNew => !isNew;
+  bool get isNotNew => !isNew;
 
   bool get isAction =>
       this == Crud.create || this == Crud.update || this == Crud.delete;
@@ -71,4 +71,10 @@ class UsuarioCrudKey {
   Crud crud;
   String userId;
   UsuarioCrudKey({required this.crud, required this.userId});
+}
+
+class ContaCrudKey {
+  Crud crud;
+  String? contaId;
+  ContaCrudKey({required this.crud, this.contaId});
 }

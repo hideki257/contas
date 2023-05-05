@@ -1,8 +1,11 @@
-import 'package:contas/widgets/wait_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/popup_menu_user_cont.dart';
+import '../controllers/user_auth_cont.dart';
+import '../models/crud.dart';
+import '../my_router.dart';
+import 'wait_widget.dart';
 
 class PopupMenuUserWidget extends ConsumerWidget {
   const PopupMenuUserWidget({super.key});
@@ -22,6 +25,23 @@ class PopupMenuUserWidget extends ConsumerWidget {
             child: Text(data.usuario.getInitials(qtd: 1)),
             backgroundColor: Colors.lightBlueAccent.shade200,
           ),
+          onSelected: (value) async {
+            switch (value) {
+              case 'perfil':
+                Navigator.pushNamed(
+                  context,
+                  MyRouter.usuarioCrud,
+                  arguments: UsuarioCrudKey(
+                    crud: Crud.update,
+                    userId: UserAuthCont.usuarioId,
+                  ),
+                );
+                break;
+              case 'sair':
+                await data.sair();
+                break;
+            }
+          },
           itemBuilder: (context) => [
             PopupMenuItem(
               child: Row(
@@ -46,7 +66,7 @@ class PopupMenuUserWidget extends ConsumerWidget {
                   ),
                 ],
               ),
-              onTap: () {},
+              value: 'perfil',
             ),
             PopupMenuItem(
               child: Row(
@@ -71,9 +91,7 @@ class PopupMenuUserWidget extends ConsumerWidget {
                   ),
                 ],
               ),
-              onTap: () async {
-                await data.sair();
-              },
+              value: 'sair',
             ),
           ],
           position: PopupMenuPosition.under,

@@ -47,7 +47,7 @@ class MenuWidget extends ConsumerWidget {
                 ),
               ),
               ListTile(
-                leading: const Icon(Icons.home),
+                leading: const Icon(Icons.home_outlined),
                 title: const Text(
                   'Home Page',
                   style: TextStyle(
@@ -60,6 +60,19 @@ class MenuWidget extends ConsumerWidget {
               ),
               const Divider(height: 1),
               ListTile(
+                leading: const Icon(Icons.article_outlined),
+                title: const Text(
+                  'Contas',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onTap: () =>
+                    Navigator.popAndPushNamed(context, MyRouter.contaList),
+              ),
+              const Divider(height: 1),
+              ListTile(
                 leading: const Icon(Icons.logout),
                 title: const Text(
                   'Sair',
@@ -68,12 +81,7 @@ class MenuWidget extends ConsumerWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onTap: () async {
-                  await data.sair();
-                  if (isMobile) {
-                    Navigator.pop(context);
-                  }
-                },
+                onTap: () async {},
               ),
             ],
           ),

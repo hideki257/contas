@@ -24,6 +24,13 @@ class Usuario {
     };
   }
 
+  Map<String, dynamic> toMapUpdate() {
+    return {
+      'nome': nome,
+      'dataNascimento': dataNascimento?.millisecondsSinceEpoch,
+    };
+  }
+
   Usuario.fromMap(Map<String, dynamic> map)
       : userId = map['userId'],
         email = map['email'],

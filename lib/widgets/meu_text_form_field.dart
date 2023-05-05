@@ -15,6 +15,9 @@ class MeuTextFormField extends StatelessWidget {
   final bool obscureText;
   final bool isData;
   final List<TextInputFormatter>? inputFormatters;
+  final bool showClearButton;
+  final CallbackFunction? onClearButtonTap;
+  final TextAlign textAlign;
 
   const MeuTextFormField({
     super.key,
@@ -26,6 +29,9 @@ class MeuTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.isData = false,
     this.inputFormatters,
+    this.showClearButton = false,
+    this.onClearButtonTap,
+    this.textAlign = TextAlign.start,
   });
   @override
   Widget build(BuildContext context) {
@@ -41,7 +47,14 @@ class MeuTextFormField extends StatelessWidget {
           iconColor: isReadOnly ? corBackgroundReadOnly : null,
           hoverColor: isReadOnly ? corBackgroundReadOnly : null,
           focusColor: isReadOnly ? corBackgroundReadOnly : null,
+          suffixIcon: (!isReadOnly && showClearButton)
+              ? IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: onClearButtonTap,
+                )
+              : null,
         ),
+        textAlign: textAlign,
         readOnly: isReadOnly || isData,
         validator: validator,
         onTap: onTap,
