@@ -24,8 +24,7 @@ class ContaCrudCont extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
   TipoConta? inputTipoConta;
   final inputNome = TextEditingController();
-  double inputSaldoInicial = 0;
-  final outputSaldoInicial = TextEditingController();
+  final inputSaldoInicial = TextEditingController();
   bool inputFavorita = false;
   bool inputInativa = false;
   bool isLoading = true;
@@ -38,8 +37,7 @@ class ContaCrudCont extends ChangeNotifier {
     if (contaCrudKey.crud.isNew) {
       inputTipoConta = null;
       inputNome.clear();
-      inputSaldoInicial = 0;
-      outputSaldoInicial.clear();
+      inputSaldoInicial.clear();
       inputFavorita = false;
       inputInativa = false;
     } else {
@@ -51,8 +49,7 @@ class ContaCrudCont extends ChangeNotifier {
       }
       inputTipoConta = conta.tipoConta;
       inputNome.text = conta.nome;
-      inputSaldoInicial = conta.saldoInicial;
-      outputSaldoInicial.text = inputSaldoInicial.toStrForm2Dig();
+      inputSaldoInicial.text = conta.saldoInicial.toStrForm2Dig();
       inputFavorita = conta.favorito;
       inputInativa = conta.inativo;
     }
@@ -84,18 +81,13 @@ class ContaCrudCont extends ChangeNotifier {
   }
 
   String? validarSaldoInicial(String? value) {
-    String? result = validarCampo(
+    return validarCampo(
       campo: 'Saldo inicial',
       valor: value,
       regrasDeValidacao: [
         regraValidarDec2DigSinal,
       ],
     );
-    if (result == null && value != null && value.isNotEmpty) {
-      inputSaldoInicial = value.fromStrFormatado() ?? 0;
-      notifyListeners();
-    }
-    return result;
   }
 
   setFavorita(bool? value) {
@@ -118,7 +110,7 @@ class ContaCrudCont extends ChangeNotifier {
           return await contaData.criarConta(
             tipoConta: inputTipoConta!,
             nome: inputNome.text,
-            saldoInicial: inputSaldoInicial,
+            saldoInicial: inputSaldoInicial.text.fromStrFormatado() ?? 0,
             favorito: inputFavorita,
             inativo: inputInativa,
           );
@@ -128,7 +120,7 @@ class ContaCrudCont extends ChangeNotifier {
               contaId: contaCrudKey.contaId,
               tipoConta: inputTipoConta!,
               nome: inputNome.text,
-              saldoInicial: inputSaldoInicial,
+              saldoInicial: inputSaldoInicial.text.fromStrFormatado() ?? 0,
               favorito: inputFavorita,
               inativo: inputInativa,
             ),

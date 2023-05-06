@@ -5,58 +5,97 @@ import '../controllers/conta_list_cont.dart';
 import '../models/conta.dart';
 import '../models/crud.dart';
 import '../my_router.dart';
+import '../widgets/page_message_widget.dart';
+import '../widgets/page_wait_widget.dart';
 import '../widgets/pagina_formatada.dart';
-import '../widgets/wait_widget.dart';
 import '../utils/formatacao_utils.dart';
 
 class ContaListPage extends ConsumerWidget {
-  const ContaListPage({super.key});
+  ContaListPage({super.key});
+  bool isLoading = true;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<ContaListCont> contaListCont = ref.watch(contaListContProvider);
+    const String appTitle = 'Contas - Listar';
+    final contaListCont = ref.watch(contaListContProvider);
+    if (isLoading) {
+      isLoading = false;
+      contaListCont.refresh();
+    }
 
     return PaginaFormatada(
-      appBarTitulo: 'Contas - Listar',
-      page: contaListCont.when(
-        loading: () => const WaitWidget(),
-        error: (error, _) => Center(child: Text(error.toString())),
-        data: (data) => data.contas.isEmpty
-            ? const Center(child: Text('Nenhuma conta encontrada!'))
-            : ListView.separated(
-                itemCount: data.contas.length,
-                separatorBuilder: (_, __) => const Divider(),
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(data.contas[index].nome),
-                    subtitle:
-                        Text(data.contas[index].saldoInicial.toStrForm2Dig()),
-                    leading: Text(data.contas[index].tipoConta.toDescr),
-                    /*
+      appBarTitulo: appTitle,
+      appBarActions: [
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.pushNamed(context, MyRouter.contaCrud,
+                    arguments: ContaCrudKey(crud: Crud.create))
+                .then((value) {
+              if (value is bool && value) {
+                contaListCont.refresh();
+              }
+            });
+          },
+        ),
+      ],
+      page: contaListCont.contas.isEmpty
+          ? const Center(child: Text('Nenhuma conta encontrada!'))
+          : ListView.separated(
+              itemCount: contaListCont.contas.length,
+              separatorBuilder: (_, __) => const Divider(),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(
+                    top: 8,
+                    left: 8,
+                    right: 8,
+                  ),
+                  child: ListTile(
+                    shape: const OutlineInputBorder(),
+                    title: Text(contaListCont.contas[index].nome),
+                    subtitle: Text(contaListCont.contas[index].saldoInicial
+                        .toStrForm2Dig()),
+                    leading: Icon(contaListCont.contas[index].tipoConta.toIcon),
                     trailing: Row(
-                      children: [
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
                         Icon(
-                          data.contas[index].favorito
+                          contaListCont.contas[index].favorito
                               ? Icons.favorite
                               : Icons.favorite_outline,
-                          color: data.contas[index].favorito
+                          color: contaListCont.contas[index].favorito
                               ? Colors.redAccent.shade700
                               : null,
                         ),
                         Icon(
-                          data.contas[index].inativo
+                          contaListCont.contas[index].inativo
                               ? Icons.do_disturb
                               : Icons.check,
-                          color: data.contas[index].inativo
+                          color: contaListCont.contas[index].inativo
                               ? Colors.grey.shade700
                               : Colors.green.shade700,
                         ),
                       ],
                     ),
-                    */
-                  );
-                },
-              ),
-      ),
+                    onTap: () async {
+                      Navigator.pushNamed(
+                        context,
+                        MyRouter.contaCrud,
+                        arguments: ContaCrudKey(
+                          crud: Crud.update,
+                          contaId: contaListCont.contas[index].contaId,
+                        ),
+                      ).then((value) async {
+                        if (value is bool && value) {
+                          await contaListCont.refresh();
+                        }
+                      });
+                    },
+                  ),
+                );
+              },
+            ),
     );
   }
 }

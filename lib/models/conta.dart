@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class ContaException implements Exception {
@@ -5,7 +6,7 @@ class ContaException implements Exception {
   ContaException(this.mensagem);
 }
 
-enum TipoConta { ctaCorr, crtCred, ctaDebt }
+enum TipoConta { ctaCorr, crtCred, ctaDebt, ctaInvs }
 
 extension TipoContaExt on TipoConta {
   String _toDescr() {
@@ -16,6 +17,8 @@ extension TipoContaExt on TipoConta {
         return 'Cartão de crédito';
       case TipoConta.ctaDebt:
         return 'Conta de débito';
+      case TipoConta.ctaInvs:
+        return 'Conta de investimento';
     }
   }
 
@@ -27,12 +30,29 @@ extension TipoContaExt on TipoConta {
         return 'crtCred';
       case TipoConta.ctaDebt:
         return 'ctaDebt';
+      case TipoConta.ctaInvs:
+        return 'ctaInvs';
+    }
+  }
+
+  IconData _toIcon() {
+    switch (this) {
+      case TipoConta.ctaCorr:
+        return Icons.account_balance_wallet;
+      case TipoConta.crtCred:
+        return Icons.credit_card;
+      case TipoConta.ctaDebt:
+        return Icons.request_quote;
+      case TipoConta.ctaInvs:
+        return Icons.ssid_chart;
     }
   }
 
   String get toDescr => _toDescr();
 
   String get toStr => _toStr();
+
+  IconData get toIcon => _toIcon();
 }
 
 extension StringTipoContaExt on String {
@@ -44,6 +64,8 @@ extension StringTipoContaExt on String {
         return TipoConta.crtCred;
       case 'ctaDebt':
         return TipoConta.ctaDebt;
+      case 'ctaInvs':
+        return TipoConta.ctaInvs;
       default:
         return null;
     }
@@ -55,6 +77,7 @@ extension StringTipoContaExt on String {
 List<TipoConta> listaTipoConta = [
   TipoConta.ctaCorr,
   TipoConta.crtCred,
+  TipoConta.ctaInvs,
   TipoConta.ctaDebt
 ];
 

@@ -1,4 +1,5 @@
 import 'package:contas/utils/show_meu_snackbar.dart';
+import 'package:contas/widgets/meu_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,7 +29,8 @@ class ContaCrudPage extends ConsumerWidget {
       appBarTitulo: 'Conta - ${contaCrudKey.crud.toDescr}',
       formBody: Column(
         children: [
-          DropdownButtonFormField<TipoConta>(
+          MeuDropdown<TipoConta>(
+            labelText: 'Tipo de conta',
             items: listaTipoConta
                 .map<DropdownMenuItem<TipoConta>>((TipoConta tipoConta) {
               return DropdownMenuItem(
@@ -42,6 +44,8 @@ class ContaCrudPage extends ConsumerWidget {
               }
             },
             validator: (value) => contaCrudCont.validarTipoConta(value),
+            value: contaCrudCont.inputTipoConta,
+            isReadOnly: contaCrudKey.crud.isNotNew,
           ),
           MeuTextFormField(
             controller: contaCrudCont.inputNome,
@@ -50,9 +54,9 @@ class ContaCrudPage extends ConsumerWidget {
             isReadOnly: contaCrudCont.contaCrudKey.crud.isNotEdit,
           ),
           MeuTextFormField(
-            controller: contaCrudCont.outputSaldoInicial,
+            controller: contaCrudCont.inputSaldoInicial,
             labelText: 'Saldo inicial',
-            validator: (value) => contaCrudCont.validarNome(value),
+            validator: (value) => contaCrudCont.validarSaldoInicial(value),
             isReadOnly: contaCrudCont.contaCrudKey.crud.isNotEdit,
             textAlign: TextAlign.right,
           ),

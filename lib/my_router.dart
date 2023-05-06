@@ -36,7 +36,7 @@ class MyRouter {
         return MaterialPageRoute(
             builder: (_) => UsuarioCrudPage(usuarioCrudKey: usuarioCrudKey));
       case contaList:
-        return MaterialPageRoute(builder: (_) => const ContaListPage());
+        return MaterialPageRoute(builder: (_) => ContaListPage());
       case contaCrud:
         ContaCrudKey contaCrudKey = (settings.arguments as ContaCrudKey);
         return MaterialPageRoute(
