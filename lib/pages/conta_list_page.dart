@@ -5,11 +5,10 @@ import '../controllers/conta_list_cont.dart';
 import '../models/conta.dart';
 import '../models/crud.dart';
 import '../my_router.dart';
-import '../widgets/page_message_widget.dart';
-import '../widgets/page_wait_widget.dart';
 import '../widgets/pagina_formatada.dart';
 import '../utils/formatacao_utils.dart';
 
+// ignore: must_be_immutable
 class ContaListPage extends ConsumerWidget {
   ContaListPage({super.key});
   bool isLoading = true;

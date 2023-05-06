@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../databases/db_firestore.dart';
@@ -84,7 +85,9 @@ class ContaData {
         result.add(Conta.fromMap(doc.data()));
       }
     }).catchError((e) {
-      print('ContaData.listarTodas-${e.toString()}');
+      if (kDebugMode) {
+        print('ContaData.listarTodas-${e.toString()}');
+      }
     });
     return result;
   }
