@@ -34,8 +34,8 @@ class ContaCrudPage extends ConsumerWidget {
             items: listaTipoConta
                 .map<DropdownMenuItem<TipoConta>>((TipoConta tipoConta) {
               return DropdownMenuItem(
-                child: Text(tipoConta.toDescr),
                 value: tipoConta,
+                child: Text(tipoConta.toDescr),
               );
             }).toList(),
             onChanged: (value) {
@@ -76,6 +76,8 @@ class ContaCrudPage extends ConsumerWidget {
           ? (() async {
               Resultado resultado = await contaCrudCont.persistir();
               if (resultado.validado) {
+                // ignore: use_build_context_synchronously
+                if (!context.mounted) return;
                 if (resultado.erro) {
                   showMeuSnackbar(
                     context,

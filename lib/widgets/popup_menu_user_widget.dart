@@ -22,8 +22,8 @@ class PopupMenuUserWidget extends ConsumerWidget {
       data: (data) {
         return PopupMenuButton(
           icon: CircleAvatar(
-            child: Text(data.usuario.getInitials(qtd: 1)),
             backgroundColor: Colors.lightBlueAccent.shade200,
+            child: Text(data.usuario.getInitials(qtd: 1)),
           ),
           onSelected: (value) async {
             switch (value) {
@@ -44,54 +44,54 @@ class PopupMenuUserWidget extends ConsumerWidget {
           },
           itemBuilder: (context) => [
             PopupMenuItem(
+              value: 'perfil',
               child: Row(
                 children: [
                   Flexible(
+                    flex: 1,
                     child: Center(
                       child: Icon(
                         Icons.account_box_outlined,
                         color: menuColor,
                       ),
                     ),
-                    flex: 1,
                   ),
                   Flexible(
+                    flex: 2,
                     child: Center(
                       child: Text(
                         'Perfil',
                         style: TextStyle(color: menuColor),
                       ),
                     ),
-                    flex: 2,
                   ),
                 ],
               ),
-              value: 'perfil',
             ),
             PopupMenuItem(
+              value: 'sair',
               child: Row(
                 children: [
                   Flexible(
+                    flex: 1,
                     child: Center(
                       child: Icon(
                         Icons.logout,
                         color: menuColor,
                       ),
                     ),
-                    flex: 1,
                   ),
                   Flexible(
+                    flex: 2,
                     child: Center(
                       child: Text(
                         'Sair',
                         style: TextStyle(color: menuColor),
                       ),
                     ),
-                    flex: 2,
                   ),
                 ],
               ),
-              value: 'sair',
             ),
           ],
           position: PopupMenuPosition.under,

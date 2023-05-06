@@ -58,6 +58,8 @@ class UsuarioCrudPage extends ConsumerWidget {
       onSalvar: () async {
         Resultado resultado = await usuarioCrudCont.alterarUsuario();
         if (resultado.validado) {
+          // ignore: use_build_context_synchronously
+          if (!context.mounted) return;
           if (resultado.erro) {
             showMeuSnackbar(
               context,

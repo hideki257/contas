@@ -45,8 +45,8 @@ class Usuario {
 
   String getInitials({int qtd = 2}) {
     String result = '';
-    String _nome = _getNome().trim().toUpperCase();
-    final splited = _nome.split(' ');
+    String nome = _getNome().trim().toUpperCase();
+    final splited = nome.split(' ');
     for (int i = 0; i < splited.length; i++) {
       if (i >= qtd) break;
       result += splited[i][0];

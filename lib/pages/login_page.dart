@@ -46,8 +46,12 @@ class LoginPage extends ConsumerWidget {
                     onPressed: () async {
                       Resultado res = await loginCont.entrar();
                       if (res.validado && res.erro) {
+                        // ignore: use_build_context_synchronously
+                        if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(res.mensagem), showCloseIcon: true));
+                          content: Text(res.mensagem),
+                          showCloseIcon: true,
+                        ));
                       }
                     },
                   ),
@@ -123,6 +127,8 @@ class LoginPage extends ConsumerWidget {
                     onPressed: () async {
                       Resultado res = await loginCont.cadastrar();
                       if (res.validado && res.erro) {
+                        // ignore: use_build_context_synchronously
+                        if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(res.mensagem), showCloseIcon: true));
                       }
