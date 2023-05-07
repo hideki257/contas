@@ -25,6 +25,7 @@ class ContaCrudCont extends ChangeNotifier {
   TipoConta? inputTipoConta;
   final inputNome = TextEditingController();
   final inputSaldoInicial = TextEditingController();
+  final inputLimiteCredito = TextEditingController();
   bool inputFavorita = false;
   bool inputInativa = false;
   bool isLoading = true;
@@ -38,6 +39,7 @@ class ContaCrudCont extends ChangeNotifier {
       inputTipoConta = null;
       inputNome.clear();
       inputSaldoInicial.clear();
+      inputLimiteCredito.clear();
       inputFavorita = false;
       inputInativa = false;
     } else {
@@ -50,6 +52,7 @@ class ContaCrudCont extends ChangeNotifier {
       inputTipoConta = conta.tipoConta;
       inputNome.text = conta.nome;
       inputSaldoInicial.text = conta.saldoInicial.toStrForm2Dig();
+      inputLimiteCredito.text = conta.limiteCredito?.toStrForm2Dig() ?? '';
       inputFavorita = conta.favorito;
       inputInativa = conta.inativo;
     }
@@ -90,6 +93,16 @@ class ContaCrudCont extends ChangeNotifier {
     );
   }
 
+  String? validarLimiteCredito(String? value) {
+    return validarCampo(
+      campo: 'Limite de crédito',
+      valor: value,
+      regrasDeValidacao: [
+        regraValidarDec2DigSinal,
+      ],
+    );
+  }
+
   setFavorita(bool? value) {
     inputFavorita = value ?? false;
     notifyListeners();
@@ -111,6 +124,7 @@ class ContaCrudCont extends ChangeNotifier {
             tipoConta: inputTipoConta!,
             nome: inputNome.text,
             saldoInicial: inputSaldoInicial.text.fromStrFormatado() ?? 0,
+            limiteCredito: inputLimiteCredito.text.fromStrFormatado(),
             favorito: inputFavorita,
             inativo: inputInativa,
           );
@@ -121,6 +135,7 @@ class ContaCrudCont extends ChangeNotifier {
               tipoConta: inputTipoConta!,
               nome: inputNome.text,
               saldoInicial: inputSaldoInicial.text.fromStrFormatado() ?? 0,
+              limiteCredito: inputLimiteCredito.text.fromStrFormatado(),
               favorito: inputFavorita,
               inativo: inputInativa,
             ),

@@ -60,6 +60,13 @@ class ContaCrudPage extends ConsumerWidget {
             isReadOnly: contaCrudCont.contaCrudKey.crud.isNotEdit,
             textAlign: TextAlign.right,
           ),
+          MeuTextFormField(
+            controller: contaCrudCont.inputLimiteCredito,
+            labelText: 'Limite de crédito',
+            validator: (value) => contaCrudCont.validarLimiteCredito(value),
+            isReadOnly: contaCrudCont.contaCrudKey.crud.isNotEdit,
+            textAlign: TextAlign.right,
+          ),
           MeuCheckBox(
             campo: 'Favorita',
             value: contaCrudCont.inputFavorita,

@@ -86,6 +86,7 @@ class Conta {
   late String contaId;
   String nome;
   double saldoInicial;
+  double? limiteCredito;
   bool favorito;
   bool inativo;
 
@@ -94,6 +95,7 @@ class Conta {
     String? contaId,
     required this.nome,
     this.saldoInicial = 0,
+    this.limiteCredito,
     this.favorito = false,
     this.inativo = false,
   }) {
@@ -111,6 +113,7 @@ class Conta {
       'contaId': contaId,
       'nome': nome,
       'saldoInicial': saldoInicial,
+      if (limiteCredito != null) 'limiteCredito': limiteCredito,
       'favorito': favorito,
       'inativo': inativo,
     };
@@ -123,6 +126,7 @@ class Conta {
         contaId = map['contaId'],
         nome = map['nome'],
         saldoInicial = map['saldoInicial'] ?? 0,
+        limiteCredito = map['limiteCredito'],
         favorito = map['favorito'] ?? false,
         inativo = map['inativo'] ?? false;
 }

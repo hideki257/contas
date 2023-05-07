@@ -15,6 +15,7 @@ class ContaData {
     String? contaId,
     required String nome,
     double saldoInicial = 0,
+    double? limiteCredito,
     bool favorito = false,
     bool inativo = false,
   }) async {
@@ -24,6 +25,7 @@ class ContaData {
       contaId: contaId,
       nome: nome,
       saldoInicial: saldoInicial,
+      limiteCredito: limiteCredito,
       favorito: favorito,
       inativo: inativo,
     );

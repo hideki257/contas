@@ -16,7 +16,7 @@ class PaginaFormatada extends StatelessWidget {
     this.appBarTitulo,
     this.appBarActions,
     required this.page,
-    this.showMenu = false,
+    this.showMenu = true,
     this.floatingActionButton,
   }) : super(key: key);
 
