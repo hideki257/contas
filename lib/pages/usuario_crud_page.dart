@@ -20,6 +20,7 @@ class UsuarioCrudPage extends ConsumerWidget {
     return FormFormatado(
       formKey: usuarioCrudCont.formKey,
       appBarTitulo: 'Usuario - ${usuarioCrudKey.crud.toDescr}',
+      maxWidth: 1000,
       formBody: Column(
         children: [
           MeuTextFormField(

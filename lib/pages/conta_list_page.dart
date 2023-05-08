@@ -38,6 +38,7 @@ class ContaListPage extends ConsumerWidget {
           },
         ),
       ],
+      maxWidth: 1000,
       page: contaListCont.contas.isEmpty
           ? const Center(child: Text('Nenhuma conta encontrada!'))
           : ListView.separated(

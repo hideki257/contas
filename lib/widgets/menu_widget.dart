@@ -68,20 +68,7 @@ class MenuWidget extends ConsumerWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onTap: () =>
-                    Navigator.popAndPushNamed(context, MyRouter.contaList),
-              ),
-              const Divider(height: 1),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text(
-                  'Sair',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onTap: () async {},
+                onTap: () => Navigator.pushNamed(context, MyRouter.contaList),
               ),
             ],
           ),

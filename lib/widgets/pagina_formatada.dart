@@ -7,6 +7,7 @@ class PaginaFormatada extends StatelessWidget {
   final Key? scaffoldKey;
   final String? appBarTitulo;
   final List<Widget>? appBarActions;
+  final double maxWidth;
   final bool showMenu;
   final Widget page;
   final Widget? floatingActionButton;
@@ -18,6 +19,7 @@ class PaginaFormatada extends StatelessWidget {
     required this.page,
     this.showMenu = true,
     this.floatingActionButton,
+    this.maxWidth = double.infinity,
   }) : super(key: key);
 
   @override
@@ -45,14 +47,17 @@ class PaginaFormatada extends StatelessWidget {
                 ),
               )
             : null,
-        body: isMobile || !showMenu
-            ? page
-            : Row(
-                children: [
-                  MenuWidget(isMobile: isMobile),
-                  Flexible(child: page),
-                ],
-              ),
+        body: Container(
+          constraints: BoxConstraints(maxWidth: maxWidth),
+          child: isMobile || !showMenu
+              ? page
+              : Row(
+                  children: [
+                    MenuWidget(isMobile: isMobile),
+                    Flexible(child: page),
+                  ],
+                ),
+        ),
         floatingActionButton: floatingActionButton,
       );
     });

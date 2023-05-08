@@ -27,6 +27,7 @@ class ContaCrudPage extends ConsumerWidget {
     return FormFormatado(
       formKey: contaCrudCont.formKey,
       appBarTitulo: 'Conta - ${contaCrudKey.crud.toDescr}',
+      maxWidth: 1000,
       formBody: Column(
         children: [
           MeuDropdown<TipoConta>(
